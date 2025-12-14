@@ -2,46 +2,42 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-// Đảm bảo file db.js tồn tại trong thư mục config/
-import connectDB from "./config/db.js"; 
-import productRoutes from './routes/productRoutes.js'; // ⬅️ IMPORT CÓ .JS
+import connectDB from "./config/db.js";
+import productRoutes from "./routes/productRoutes.js";
 
-dotenv.config(); // load .env
+dotenv.config();
+
 console.log("DEBUG: MONGO_URI =", process.env.MONGO_URI);
-connectDB(); // kết nối MongoDB
+
+connectDB();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Test route
+// Test API
 app.get("/", (req, res) => {
   res.send("🎨 API is running and connected to MongoDB!");
 });
 
-// ⬅️ SỬ DỤNG ROUTE SẢN PHẨM
-app.use('/api/products', productRoutes);
+// Routes
+app.use("/api/products", productRoutes);
 
-
-// MIDDLEWARE XỬ LÝ LỖI (Quan trọng cho asyncHandler)
-
-// Xử lý lỗi 404 cho các route không tồn tại
+// Not Found middleware
 app.use((req, res, next) => {
-    const error = new Error(`Not Found - ${req.originalUrl}`);
-    res.status(404);
-    next(error);
+  res.status(404).json({ message: "Route not found" });
 });
 
-// Middleware xử lý lỗi chung
+// Error handler
 app.use((err, req, res, next) => {
-    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-    res.status(statusCode);
-    res.json({
-        message: err.message,
-        stack: process.env.NODE_ENV === 'production' ? null : err.stack,
-    });
+  res.status(res.statusCode || 500).json({
+    message: err.message,
+    stack: process.env.NODE_ENV === "production" ? null : err.stack,
+  });
 });
 
+const PORT = 5001; // 💥 CHẠY CỐ ĐỊNH CỔNG 5001
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
+);

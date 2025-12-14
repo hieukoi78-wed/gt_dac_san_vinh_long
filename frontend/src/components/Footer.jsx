@@ -1,59 +1,42 @@
-import React from "react";
-
 export default function Footer() {
   return (
-    <footer
-      id="footer"
-      style={{
-        backgroundColor: "#111",
-        color: "#fff",
-        padding: "3rem 1rem",
-        textAlign: "center",
-      }}
-    >
-      <p style={{ marginBottom: "1rem" }}>
-        © 2025 GT Đặc Sản Vĩnh Long. All Rights Reserved.
-      </p>
+    <footer style={{ background: "#1c1c1c", color: "#fff" }}>
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "auto",
+          padding: "50px 20px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))",
+          gap: 30,
+        }}
+      >
+        <div>
+          <h4>Đặc Sản Vĩnh Long</h4>
+          <p>Gìn giữ tinh hoa miền Tây</p>
+        </div>
+
+        <div>
+          <h4>Liên hệ</h4>
+          <p>Email: hieukoi78@gmail.com</p>
+        </div>
+
+        <div>
+          <h4>Hỗ trợ</h4>
+          <p>Chính sách & vận chuyển</p>
+        </div>
+      </div>
 
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "2rem",
-          fontSize: "1.2rem",
+          background: "#f4c430",
+          textAlign: "center",
+          padding: 12,
+          fontWeight: 600,
+          color: "#000",
         }}
       >
-        <a
-          href="https://www.facebook.com/share/17fhQdyBcf/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: "white",
-            textDecoration: "none",
-            padding: "0.2rem 0.5rem",
-            borderRadius: "5px",
-            transition: "all 0.3s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD700")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
-        >
-          Facebook
-        </a>
-
-        <a
-          href="mailto:hieukoi78@gmail.com"
-          style={{
-            color: "white",
-            textDecoration: "none",
-            padding: "0.2rem 0.5rem",
-            borderRadius: "5px",
-            transition: "all 0.3s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#FFD700")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
-        >
-          Email
-        </a>
+        © 2025 Đặc Sản Vĩnh Long
       </div>
     </footer>
   );

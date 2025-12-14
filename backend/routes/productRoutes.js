@@ -1,3 +1,4 @@
+// routes/productRoutes.js
 import express from 'express';
 import {
   getProducts,
@@ -11,12 +12,15 @@ const router = express.Router();
 
 const validateProduct = (req, res, next) => {
   const { title, category, image, price } = req.body;
+
   if (!title || !category || !image || price === undefined) {
     return res.status(400).json({ message: "Vui lòng cung cấp đầy đủ thông tin" });
   }
+
   if (typeof price !== 'number' || price < 0) {
     return res.status(400).json({ message: "Giá sản phẩm phải là số dương" });
   }
+
   next();
 };
 
